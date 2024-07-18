@@ -1,0 +1,29 @@
+# Ejercicio 0.5: Diagrama de aplicación de una sola página
+
+sequenceDiagram
+    participante navegador
+    participante servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activa servidor
+    servidor-->>navegador: Documento HTML
+    deactiva servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activa servidor
+    servidor-->>navegador: El archivo CSS
+    deactiva servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activa servidor
+    servidor-->>navegador: El archivo JavaScript
+    deactiva servidor
+
+    Nota lista en el navegador: El navegador ejecuta el código JavaScript que obtiene el JSON del servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activa servidor
+    servidor-->>navegador: [{ "content": "HTML is easy", "date": "2024-18-07" }, ... ]
+    deactiva servidor
+
+    Nota lista en el navegador: El navegador ejecuta la función de callback que renderiza las notas en la SPA

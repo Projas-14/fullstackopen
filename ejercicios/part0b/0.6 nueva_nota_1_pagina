@@ -1,0 +1,21 @@
+# Ejercicio 0.6: Nueva nota en diagrama de aplicación de una sola página
+
+sequenceDiagram
+    participante navegador
+    participante servidor
+
+    Nota lista en el navegador: El usuario escribe una nota y hace clic en el botón "Save"
+
+    navegador->>servidor: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activa servidor
+    Nota lista en el servidor: El servidor recibe los datos de la nueva nota y la guarda
+    servidor-->>navegador: {"message": "note created"}
+    deactiva servidor
+
+    Nota lista en el navegador: El navegador actualiza la lista de notas sin recargar la página
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate servidor
+    servidor-->>navegador: [{ "content": "HTML is easy", "date": "2024-18-07" }, ... , { "content": "Nueva nota", "date": "2024-18-07" }]
+    deactiva servidor
+
+    Nota lista del navegador: El navegador ejecuta la función de callback que renderiza las notas incluyendo la nueva nota

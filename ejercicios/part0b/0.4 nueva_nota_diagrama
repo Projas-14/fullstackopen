@@ -1,0 +1,35 @@
+# Ejercicio 0.4: Nuevo diagrama de nota
+
+sequenceDiagram
+    participante navegador
+    participante servidor
+
+    navegador->>servidor: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activa servidor
+    Nota lista en el servidor: El servidor recibe los datos de la nueva nota y la guarda
+    servidor-->>navegador: Redireccionar a /notes
+    deactiva servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activa servidor
+    servidor-->>navegador: Documento HTML
+    deactiva servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activa servidor
+    servidor-->>navegador: El archivo CSS
+    deactiva servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activa servidor
+    servidor-->>navegador: El archivo JavaScript
+    deactiva servidor
+
+    Nota lista en el navegador: El navegador ejecuta el código JavaScript que obtiene el JSON del servidor
+
+    navegador->>servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate servidor
+    servidor-->>navegador: [{ "content": "HTML is easy", "date": "2024-18-07" }, ... ]
+    deactiva servidor
+
+    Nota lista en el navegador: El navegador ejecuta la función de callback que renderiza las notas
